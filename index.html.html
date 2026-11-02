@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#f6f4ec" />
+<title>نَبّه | تحدّي الأصدقاء</title>
+<style>
+  :root{
+    --bg:#f6f4ec;--paper:#fffefa;--ink:#202c27;--muted:#718078;--line:#e7e8df;
+    --green:#216b50;--green2:#dff1e6;--lime:#d9ef8b;--orange:#f5b66e;--blue:#dceaf2;
+    --shadow:0 18px 45px rgba(35,57,44,.08);--radius:24px;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:radial-gradient(circle at 90% 0%,#e9f1df 0,transparent 28rem),var(--bg);color:var(--ink);font-family:Tahoma,Arial,sans-serif;line-height:1.65}
+  button,input{font:inherit}button{cursor:pointer}
+  .shell{max-width:1120px;margin:auto;padding:22px 20px 54px}
+  header{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:30px}
+  .brand{display:flex;align-items:center;gap:11px;font-weight:900;font-size:23px;letter-spacing:-1px}
+  .logo{width:43px;height:43px;border-radius:15px;background:var(--green);display:grid;place-items:center;color:white;font-size:23px;box-shadow:0 8px 18px #216b5030}
+  .top-note{font-size:12px;color:var(--muted);background:#ffffffb8;border:1px solid var(--line);padding:8px 13px;border-radius:30px}
+  .hero{display:grid;grid-template-columns:1.2fr .8fr;gap:24px;align-items:center;margin:26px 0 30px}
+  .eyebrow{display:inline-flex;align-items:center;gap:7px;color:var(--green);font-size:13px;font-weight:800;background:var(--green2);padding:7px 12px;border-radius:30px}
+  h1{font-size:clamp(33px,5vw,54px);line-height:1.22;letter-spacing:-1.8px;margin:15px 0 12px}
+  h1 span{color:var(--green)}
+  .lead{font-size:16px;max-width:600px;color:var(--muted);margin:0}
+  .hero-art{min-height:220px;background:linear-gradient(140deg,#e2efdf,#f9e8cb);border:1px solid #e1e8d8;border-radius:30px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow)}
+  .bubble{position:absolute;border-radius:50%;opacity:.75}.bubble.a{width:170px;height:170px;background:#c8dfb8;left:-24px;top:-52px}.bubble.b{width:120px;height:120px;background:#f4c58b;right:-28px;bottom:-20px}
+  .phone{position:relative;width:154px;height:184px;border:7px solid #263a32;border-radius:26px;background:#fffefa;transform:rotate(-7deg);box-shadow:0 18px 26px #344c3a35;padding:12px;z-index:1}
+  .phone:before{content:"";display:block;width:48px;height:5px;border-radius:5px;background:#263a32;margin:-3px auto 13px}
+  .phone .mini-label{font-size:9px;color:#77857b;text-align:center}.phone .mini-q{font-weight:900;text-align:center;font-size:14px;line-height:1.5;margin:9px 0}.mini-option{height:22px;border:1px solid #e5e9df;border-radius:8px;margin:5px 0;background:#f8faf5}.mini-option:nth-of-type(2){background:#e1f1e5;border-color:#a8cfb5}
+  .floating-score{position:absolute;z-index:2;background:#fff;border:1px solid #e6e8dc;padding:10px 14px;border-radius:16px;box-shadow:var(--shadow);font-size:12px;font-weight:800}.floating-score.one{top:34px;right:22px}.floating-score.two{bottom:26px;left:20px}
+  .section-head{display:flex;justify-content:space-between;align-items:end;gap:16px;margin:32px 0 15px}.section-head h2{font-size:22px;margin:0}.section-head p{margin:4px 0 0;color:var(--muted);font-size:13px}
+  .mode-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .mode-card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:22px;text-align:right;box-shadow:0 6px 20px #334b3908;transition:.2s;min-height:220px;position:relative;overflow:hidden}
+  .mode-card:hover{transform:translateY(-3px);box-shadow:var(--shadow);border-color:#bfd6c5}
+  .mode-card .icon{width:50px;height:50px;border-radius:17px;display:grid;place-items:center;font-size:25px;margin-bottom:15px;background:var(--green2)}
+  .mode-card:nth-child(2) .icon{background:#fcebd8}
+  .mode-card h3{margin:0 0 6px;font-size:19px}.mode-card p{margin:0 0 18px;color:var(--muted);font-size:13px;max-width:430px}
+  .pill{display:inline-flex;align-items:center;gap:6px;background:#f2f4ed;color:#53665a;padding:6px 10px;border-radius:30px;font-size:11px;font-weight:700}
+  .arrow{position:absolute;left:22px;bottom:22px;width:38px;height:38px;border-radius:50%;background:var(--green);color:white;display:grid;place-items:center;font-size:20px}
+  .panel{display:none;background:var(--paper);border:1px solid var(--line);border-radius:28px;padding:22px;box-shadow:var(--shadow);margin-top:20px;animation:rise .25s ease}
+  .panel.active{display:block}@keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  .panel-top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px}.panel-top h2{margin:0;font-size:22px}.back{border:1px solid var(--line);background:#fff;border-radius:30px;padding:8px 13px;color:#65736b;font-size:12px}
+  .sub{color:var(--muted);font-size:13px;margin:4px 0 0}
+  .room-layout{display:grid;grid-template-columns:.9fr 1.1fr;gap:18px}
+  .soft-box{background:#f6f8f2;border:1px solid #e8ede3;border-radius:21px;padding:18px}
+  .room-code{display:flex;align-items:center;justify-content:space-between;background:#fff;border:1px dashed #b7cdbb;border-radius:16px;padding:13px 16px;margin:12px 0}
+  .room-code strong{font-size:27px;letter-spacing:5px;color:var(--green);direction:ltr}
+  .copy{border:0;background:var(--green2);color:var(--green);font-weight:800;border-radius:11px;padding:8px 11px;font-size:12px}
+  .field-row{display:flex;gap:8px;margin-top:12px}.field-row input,.name-input{min-width:0;flex:1;border:1px solid var(--line);border-radius:13px;padding:12px 13px;background:#fff;outline:none}.field-row input:focus,.name-input:focus{border-color:#8db69b;box-shadow:0 0 0 3px #dff1e6}
+  .primary{border:0;background:var(--green);color:white;border-radius:14px;padding:12px 18px;font-weight:800;box-shadow:0 7px 16px #216b5025}.primary:hover{background:#18563f}.secondary{border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:14px;padding:11px 15px;font-weight:700}
+  .players{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}.player-chip{background:#fff;border:1px solid var(--line);border-radius:30px;padding:7px 11px;font-size:12px;display:flex;align-items:center;gap:7px}.dot{width:8px;height:8px;border-radius:50%;background:#6daf7e}
+  .hint{font-size:11px;color:#8a958e;margin-top:12px}
+  .game-area{display:none}.game-area.show{display:block}
+  .game-meta{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}.meta-chip{font-size:12px;background:#f0f4eb;padding:7px 11px;border-radius:30px;color:#52655a}
+  .question-card{background:#f8f8f2;border:1px solid var(--line);border-radius:22px;padding:22px;margin:12px 0}.question-card .category{color:var(--green);font-size:12px;font-weight:900}.question-card h3{font-size:22px;line-height:1.5;margin:9px 0 0}
+  .answers{display:grid;grid-template-columns:1fr 1fr;gap:10px}.answer{border:1px solid var(--line);border-radius:15px;background:white;padding:14px;text-align:right;font-weight:700;color:#3a4941;transition:.15s}.answer:hover{border-color:#96bba1;background:#f3faf4}.answer:disabled{cursor:default;opacity:1}.answer.correct{background:#e1f3e5;border-color:#82bd91;color:#216b50}.answer.wrong{background:#fff0e8;border-color:#e8b49a;color:#a5502d}
+  .feedback{display:none;padding:12px 14px;border-radius:14px;margin-top:12px;font-size:13px;font-weight:700}.feedback.show{display:block}.feedback.good{background:#e4f4e7;color:#226643}.feedback.bad{background:#fff0e8;color:#9a4e2d}
+  .game-footer{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:16px;flex-wrap:wrap}
+  .score-list{display:grid;gap:8px;margin-top:12px}.score-row{display:flex;justify-content:space-between;align-items:center;background:#fff;border:1px solid var(--line);border-radius:13px;padding:10px 12px;font-size:13px}.score-row b{color:var(--green)}
+  .pass-start{max-width:620px;margin:auto;text-align:center;padding:12px 4px}.turn-banner{background:#fdf0dd;border:1px solid #f1dfc6;border-radius:18px;padding:18px;margin:14px 0}.turn-banner strong{font-size:22px;display:block;margin:4px}
+  .leaderboard{background:var(--paper);border:1px solid var(--line);border-radius:24px;padding:20px;margin-top:28px}.leaderboard h2{margin:0;font-size:20px}.leader-row{display:flex;align-items:center;gap:12px;padding:12px 4px;border-bottom:1px solid #eff0e9}.leader-row:last-child{border:0}.rank{width:30px;height:30px;display:grid;place-items:center;border-radius:10px;background:#f3f4ed;font-weight:900;font-size:12px}.leader-row .person{flex:1;font-weight:700;font-size:13px}.points{font-size:12px;color:var(--green);font-weight:900}
+  .notice{background:#edf3e9;border:1px solid #dde8d8;border-radius:16px;padding:13px 15px;color:#526c59;font-size:12px;margin-top:18px}
+  footer{text-align:center;color:#9aa39c;font-size:11px;padding:28px 0 0}
+  @media(max-width:760px){.hero{grid-template-columns:1fr}.hero-art{min-height:190px}.room-layout{grid-template-columns:1fr}.top-note{display:none}}
+  @media(max-width:560px){.shell{padding:15px 13px 35px}.mode-grid{grid-template-columns:1fr}.mode-card{min-height:185px}.answers{grid-template-columns:1fr}.panel{padding:16px}.panel-top{align-items:flex-start}.question-card h3{font-size:19px}.hero{margin-top:14px}}
+</style>
+</head>
+<body>
+<div class="shell">
+  <header>
+    <div class="brand"><div class="logo">ن</div><span>نَبّه</span></div>
+    <div class="top-note">نموذج تصوري للألعاب الجماعية · بدون حسابات أو تسجيل دخول</div>
+  </header>
+
+  <section class="hero">
+    <div>
+      <div class="eyebrow">✦ وقت الانتظار صار تحدّياً</div>
+      <h1>اجمع أصحابك،<br><span>واختبروا معلوماتكم!</span></h1>
+      <p class="lead">أسئلة ممتعة، منافسة خفيفة، وضحكات بين الأصدقاء. اختر طريقة اللعب وابدأ التحدي خلال ثوانٍ.</p>
+    </div>
+    <div class="hero-art" aria-hidden="true">
+      <div class="bubble a"></div><div class="bubble b"></div>
+      <div class="floating-score one">🏆 أحمد · ٨٠ نقطة</div>
+      <div class="phone"><div class="mini-label">تحدّي الأصدقاء</div><div class="mini-q">ما هو أكبر كوكب في المجموعة الشمسية؟</div><div class="mini-option"></div><div class="mini-option"></div><div class="mini-option"></div></div>
+      <div class="floating-score two">⚡ ٣ لاعبين متحمسين</div>
+    </div>
+  </section>
+
+  <div class="section-head">
+    <div><h2>كيف تريدون اللعب؟</h2><p>اختر الطريقة الأنسب لمجموعتكم.</p></div>
+    <span class="pill">🎮 لعبة معلومات عامة</span>
+  </div>
+
+  <section class="mode-grid" id="modeChoices">
+    <button class="mode-card" onclick="openRoomMode()">
+      <div class="icon">📱</div><h3>كل لاعب من هاتفه</h3>
+      <p>أنشئ غرفة، شارك الرمز مع أصحابك، وكل شخص يجيب من جهازه. هذا هو نمط اللعب عبر الإنترنت.</p>
+      <span class="pill">غرفة خاصة · رمز انضمام</span><span class="arrow">←</span>
+    </button>
+    <button class="mode-card" onclick="openPassMode()">
+      <div class="icon">🤝</div><h3>جهاز واحد للجميع</h3>
+      <p>اجلسوا حول هاتف واحد، أضيفوا أسماءكم، ومرّروا الجهاز بينكم للإجابة بالتناوب.</p>
+      <span class="pill">بدون اتصال بين الأجهزة</span><span class="arrow">←</span>
+    </button>
+  </section>
+
+  <!-- Room mode: local UI simulation only -->
+  <section class="panel" id="roomPanel">
+    <div class="panel-top"><div><h2>غرفة الأصدقاء</h2><p class="sub">أنشئوا غرفة وادعوا اللاعبين للانضمام.</p></div><button class="back" onclick="backHome()">← طرق اللعب</button></div>
+    <div class="room-layout" id="roomSetup">
+      <div class="soft-box">
+        <span class="pill">🔐 غرفة خاصة</span>
+        <h3 style="margin:13px 0 4px">رمز الغرفة</h3>
+        <div class="room-code"><strong id="roomCode">N8K42</strong><button class="copy" onclick="copyCode()">نسخ الرمز</button></div>
+        <p class="sub">اعرض الرمز على أصحابك أو أرسله لهم. في النسخة الحقيقية يفتح كل لاعب الرابط من هاتفه وينضم للغرفة.</p>
+        <div class="notice">هذه محاكاة على جهاز واحد لشرح الفكرة. ربط الهواتف ببعضها يحتاج لاحقاً إلى Supabase Realtime.</div>
+      </div>
+      <div class="soft-box">
+        <h3 style="margin:0 0 4px">اللاعبون في الغرفة</h3>
+        <p class="sub">أضف أسماء تجريبية لتوضيح شكل قائمة المشاركين.</p>
+        <div class="field-row"><input id="roomName" maxlength="18" placeholder="اسم اللاعب المستعار" /><button class="primary" onclick="addRoomPlayer()">انضمام</button></div>
+        <div class="players" id="roomPlayers"></div>
+        <div class="game-footer"><span class="sub" id="roomCount">3 لاعبين</span><button class="primary" onclick="startRoomGame()">ابدأ التحدي ←</button></div>
+      </div>
+    </div>
+    <div class="game-area" id="roomGame">
+      <div class="game-meta"><span class="meta-chip" id="roomRound">السؤال 1 من 5</span><span class="meta-chip">🌍 معلومات عامة</span><span class="meta-chip">👥 غرفة الأصدقاء</span></div>
+      <div class="question-card"><span class="category" id="roomCategory"></span><h3 id="roomQuestion"></h3></div>
+      <div class="answers" id="roomAnswers"></div>
+      <div class="feedback" id="roomFeedback"></div>
+      <div class="game-footer"><span class="sub" id="roomTurnLabel">اختر إجابة للاعب الحالي</span><button class="primary" id="roomNext" onclick="nextRoomQuestion()" style="display:none">السؤال التالي ←</button></div>
+      <div style="margin-top:18px"><h3 style="font-size:15px;margin:0">ترتيب الغرفة</h3><div class="score-list" id="roomScores"></div></div>
+    </div>
+  </section>
+
+  <!-- Pass and play mode -->
+  <section class="panel" id="passPanel">
+    <div class="panel-top"><div><h2>جهاز واحد للجميع</h2><p class="sub">أضيفوا أسماء اللاعبين، ثم مرّروا الهاتف بينكم.</p></div><button class="back" onclick="backHome()">← طرق اللعب</button></div>
+    <div id="passSetup" class="soft-box">
+      <h3 style="margin:0 0 5px">من سيشارك في التحدي؟</h3><p class="sub">أضيفوا من لاعبين إلى ستة لاعبين.</p>
+      <div class="field-row"><input id="passName" maxlength="18" placeholder="اكتب اسماً مستعاراً" /><button class="primary" onclick="addPassPlayer()">إضافة</button></div>
+      <div class="players" id="passPlayers"></div>
+      <div class="game-footer"><span class="sub" id="passCount">3 لاعبين</span><button class="primary" onclick="beginPassGame()">ابدأوا اللعب ←</button></div>
+    </div>
+    <div class="game-area" id="passHandoff">
+      <div class="pass-start"><span class="pill">🤫 لا تنظر إلى إجابة اللاعب السابق</span><div class="turn-banner"><span class="sub">مرّروا الجهاز إلى</span><strong id="nextPlayerName">أحمد</strong><span class="sub">هل أنت مستعد؟</span></div><button class="primary" onclick="showPassQuestion()">أنا مستعد، اعرض السؤال</button></div>
+    </div>
+    <div class="game-area" id="passGame">
+      <div class="game-meta"><span class="meta-chip" id="passRound">السؤال 1 من 5</span><span class="meta-chip">🎯 دور اللاعب</span></div>
+      <div class="question-card"><span class="category" id="passCategory"></span><h3 id="passQuestion"></h3></div>
+      <div class="answers" id="passAnswers"></div>
+      <div class="feedback" id="passFeedback"></div>
+      <div class="game-footer"><span class="sub" id="passTurnLabel"></span><button class="primary" id="passNext" onclick="advancePassTurn()" style="display:none">التالي ←</button></div>
+    </div>
+    <div class="game-area" id="passResult"><h3>انتهى التحدي! 🎉</h3><p class="sub">هذا ترتيب الأصدقاء في هذه الجولة.</p><div class="score-list" id="passScores"></div><div class="game-footer"><button class="secondary" onclick="resetPassGame()">العبوا مرة أخرى</button><button class="primary" onclick="backHome()">العودة للرئيسية</button></div></div>
+  </section>
+
+  <section class="leaderboard">
+    <div class="section-head" style="margin:0 0 8px"><div><h2>أبطال هذا الأسبوع</h2><p>مثال توضيحي للترتيب الأسبوعي في نَبّه.</p></div><span class="pill">🏆 أسبوعي</span></div>
+    <div class="leader-row"><span class="rank">١</span><span class="person">🥇 برق المعرفة</span><span class="points">١٬٢٤٠ XP</span></div>
+    <div class="leader-row"><span class="rank">٢</span><span class="person">فضولي</span><span class="points">٩٨٠ XP</span></div>
+    <div class="leader-row"><span class="rank">٣</span><span class="person">قاهر الألغاز</span><span class="points">٨٦٠ XP</span></div>
+    <div class="notice">الترتيب هنا تجريبي للعرض فقط. في النظام الفعلي تُحسب النقاط على الخادم ولا يستطيع اللاعب تعديلها بنفسه.</div>
+  </section>
+  <footer>نَبّه · نموذج توضيحي محلي · لا يوجد تسجيل دخول أو ربط حقيقي بين الأجهزة</footer>
+</div>
+<script>
+const questions = [
+ {cat:'🌌 العلوم والفضاء',q:'ما هو أكبر كوكب في المجموعة الشمسية؟',a:['الأرض','المشتري','زحل','نبتون'],c:1,why:'المشتري هو أكبر كواكب المجموعة الشمسية.'},
+ {cat:'🌍 الجغرافيا',q:'ما عاصمة اليابان؟',a:['سيول','بكين','طوكيو','بانكوك'],c:2,why:'طوكيو هي عاصمة اليابان.'},
+ {cat:'🧠 معلومات عامة',q:'كم عدد ألوان قوس قزح التقليدية؟',a:['خمسة','ستة','سبعة','ثمانية'],c:2,why:'تُقسم ألوان قوس قزح تقليدياً إلى سبعة ألوان.'},
+ {cat:'🏛️ التاريخ',q:'أي حضارة بنت الأهرامات في الجيزة؟',a:['الرومانية','المصرية القديمة','الإغريقية','الفارسية'],c:1,why:'بُنيت أهرامات الجيزة في مصر القديمة.'},
+ {cat:'💻 التقنية',q:'ماذا تعني الأحرف WWW؟',a:['World Wide Web','World Web Window','Wide World Wire','Web World Work'],c:0,why:'WWW اختصار لعبارة World Wide Web.'}
+];
+let roomPlayers=['أحمد','البرق','فضولي']; let roomScores={}; let roomIndex=0; let roomAnsweredPlayers=new Set(); let roomCode='N8K42';
+let passPlayers=['أحمد','سارة','خالد']; let passScores={}; let passIndex=0; let passQuestionIndex=0; let passAnswered=false;
+const $=id=>document.getElementById(id);
+function randomCode(){return Math.random().toString(36).slice(2,7).toUpperCase()}
+function hidePanels(){['roomPanel','passPanel'].forEach(id=>$(id).classList.remove('active'));}
+function backHome(){hidePanels();$('modeChoices').style.display='grid';}
+function openRoomMode(){hidePanels();$('modeChoices').style.display='none';$('roomPanel').classList.add('active');$('roomSetup').style.display='grid';$('roomGame').classList.remove('show');roomCode=randomCode();$('roomCode').textContent=roomCode;renderRoomPlayers();$('roomPanel').scrollIntoView({behavior:'smooth',block:'start'});}
+function openPassMode(){hidePanels();$('modeChoices').style.display='none';$('passPanel').classList.add('active');$('passSetup').style.display='block';['passHandoff','passGame','passResult'].forEach(id=>$(id).classList.remove('show'));renderPassPlayers();$('passPanel').scrollIntoView({behavior:'smooth',block:'start'});}
+function renderRoomPlayers(){ $('roomPlayers').innerHTML=roomPlayers.map((n,i)=>`<span class="player-chip"><i class="dot"></i>${esc(n)}${i===0?' · المضيف':''}</span>`).join('');$('roomCount').textContent=roomPlayers.length+' لاعبين';}
+function addRoomPlayer(){let v=$('roomName').value.trim();if(!v)return;if(roomPlayers.length>=8){alert('وصلتم إلى الحد التجريبي وهو 8 لاعبين.');return;}roomPlayers.push(v);$('roomName').value='';renderRoomPlayers();}
+function copyCode(){if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(roomCode).then(()=>alert('تم نسخ رمز الغرفة: '+roomCode)).catch(()=>alert('رمز الغرفة: '+roomCode));}else{alert('رمز الغرفة: '+roomCode);}}
+function startRoomGame(){if(roomPlayers.length<2){alert('أضف لاعباً آخر قبل البدء.');return;}roomScores={};roomPlayers.forEach(n=>roomScores[n]=0);roomIndex=0;$('roomSetup').style.display='none';$('roomGame').classList.add('show');$('roomNext').onclick=nextRoomQuestion;renderRoomQuestion();}
+function renderRoomQuestion(){roomAnsweredPlayers=new Set();let q=questions[roomIndex];$('roomRound').textContent=`السؤال ${roomIndex+1} من ${questions.length}`;$('roomCategory').textContent=q.cat;$('roomQuestion').textContent=q.q;renderRoomCurrentPlayer();renderRoomScores();}
+function renderRoomCurrentPlayer(){let q=questions[roomIndex],player=roomPlayers.find(n=>!roomAnsweredPlayers.has(n));$('roomAnswers').innerHTML=q.a.map((a,i)=>`<button class="answer" onclick="answerRoom(${i})">${['أ','ب','ج','د'][i]}. ${a}</button>`).join('');$('roomFeedback').className='feedback';$('roomFeedback').textContent='';$('roomNext').style.display='none';$('roomNext').onclick=nextRoomQuestion;$('roomTurnLabel').textContent=`إجابة اللاعب: ${player} · تمت إجابة ${roomAnsweredPlayers.size} من ${roomPlayers.length}`;}
+function answerRoom(i){let player=roomPlayers.find(n=>!roomAnsweredPlayers.has(n));if(!player)return;let q=questions[roomIndex],buttons=[...$('roomAnswers').children],correct=i===q.c;buttons.forEach((b,j)=>{b.disabled=true;if(j===q.c)b.classList.add('correct');else if(j===i)b.classList.add('wrong');});if(correct)roomScores[player]+=100;roomAnsweredPlayers.add(player);$('roomFeedback').textContent=(correct?'إجابة صحيحة! +100 نقطة. ':'إجابة غير صحيحة. ')+q.why;$('roomFeedback').className='feedback show '+(correct?'good':'bad');$('roomNext').style.display='inline-block';let allDone=roomAnsweredPlayers.size===roomPlayers.length;$('roomNext').textContent=allDone?(roomIndex===questions.length-1?'عرض النتيجة':'السؤال التالي ←'):'التالي: '+roomPlayers.find(n=>!roomAnsweredPlayers.has(n))+' ←';renderRoomScores();}
+function nextRoomQuestion(){if(roomAnsweredPlayers.size<roomPlayers.length){renderRoomCurrentPlayer();return;}if(roomIndex<questions.length-1){roomIndex++;renderRoomQuestion();}else{let sorted=Object.entries(roomScores).sort((a,b)=>b[1]-a[1]);$('roomQuestion').textContent='انتهى التحدي!';$('roomCategory').textContent='🏆 النتائج النهائية';$('roomAnswers').innerHTML=sorted.map((x,i)=>`<div class="score-row"><span>${i+1}. ${esc(x[0])}</span><b>${x[1]} نقطة</b></div>`).join('');$('roomFeedback').className='feedback show good';$('roomFeedback').textContent='أحسنتم! في النسخة الحقيقية يجيب كل لاعب من هاتفه في الوقت نفسه.';$('roomNext').textContent='العودة إلى الغرفة';$('roomNext').onclick=()=>openRoomMode();}}
+function renderRoomScores(){let sorted=Object.entries(roomScores).sort((a,b)=>b[1]-a[1]);$('roomScores').innerHTML=sorted.map(([n,s],i)=>`<div class="score-row"><span>${i+1}. ${esc(n)}</span><b>${s} نقطة</b></div>`).join('');}
+function renderPassPlayers(){$('passPlayers').innerHTML=passPlayers.map((n,i)=>`<span class="player-chip">👤 ${esc(n)} ${passPlayers.length>2?`<button style="border:0;background:none;color:#a65b47" onclick="removePassPlayer(${i})">×</button>`:''}</span>`).join('');$('passCount').textContent=passPlayers.length+' لاعبين';}
+function addPassPlayer(){let v=$('passName').value.trim();if(!v)return;if(passPlayers.length>=6){alert('الحد الأقصى في هذا النموذج 6 لاعبين.');return;}passPlayers.push(v);$('passName').value='';renderPassPlayers();}
+function removePassPlayer(i){if(passPlayers.length<=2)return;passPlayers.splice(i,1);renderPassPlayers();}
+function beginPassGame(){if(passPlayers.length<2){alert('أضف لاعبين اثنين على الأقل.');return;}passScores={};passPlayers.forEach(n=>passScores[n]=0);passIndex=0;passQuestionIndex=0;$('passSetup').style.display='none';$('passHandoff').classList.add('show');showHandoff();}
+function showHandoff(){$('passGame').classList.remove('show');$('passHandoff').classList.add('show');$('nextPlayerName').textContent=passPlayers[passIndex%passPlayers.length];}
+function showPassQuestion(){let q=questions[passQuestionIndex];$('passHandoff').classList.remove('show');$('passGame').classList.add('show');$('passRound').textContent=`السؤال ${passQuestionIndex+1} من ${questions.length}`;$('passCategory').textContent=q.cat;$('passQuestion').textContent=q.q;$('passAnswers').innerHTML=q.a.map((a,i)=>`<button class="answer" onclick="answerPass(${i})">${['أ','ب','ج','د'][i]}. ${a}</button>`).join('');$('passFeedback').className='feedback';$('passNext').style.display='none';$('passTurnLabel').textContent='اللاعب الحالي: '+passPlayers[passIndex];passAnswered=false;}
+function answerPass(i){if(passAnswered)return;passAnswered=true;let q=questions[passQuestionIndex],buttons=[...$('passAnswers').children],correct=i===q.c;buttons.forEach((b,j)=>{b.disabled=true;if(j===q.c)b.classList.add('correct');else if(j===i)b.classList.add('wrong');});if(correct)passScores[passPlayers[passIndex]]+=100;$('passFeedback').textContent=(correct?'إجابة صحيحة! +100 نقطة. ':'إجابة غير صحيحة. ')+q.why;$('passFeedback').className='feedback show '+(correct?'good':'bad');$('passNext').style.display='inline-block';$('passNext').textContent=passIndex===passPlayers.length-1&&passQuestionIndex===questions.length-1?'عرض النتائج':'تمرير الجهاز ←';}
+function advancePassTurn(){if(passIndex<passPlayers.length-1){passIndex++;showHandoff();}else{passIndex=0;passQuestionIndex++;if(passQuestionIndex>=questions.length){showPassResults();}else{showHandoff();}}}
+function showHandoff(){ $('passGame').classList.remove('show');$('passHandoff').classList.add('show');$('nextPlayerName').textContent=passPlayers[passIndex]; }
+function showPassResults(){ $('passGame').classList.remove('show');$('passHandoff').classList.remove('show');$('passResult').classList.add('show');let sorted=Object.entries(passScores).sort((a,b)=>b[1]-a[1]);$('passScores').innerHTML=sorted.map(([n,s],i)=>`<div class="score-row"><span>${['🥇','🥈','🥉'][i]||'🏅'} ${esc(n)}</span><b>${s} نقطة</b></div>`).join('');}
+function resetPassGame(){ $('passResult').classList.remove('show');$('passSetup').style.display='block';renderPassPlayers(); }
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+renderRoomPlayers();renderPassPlayers();
+</script>
+</body>
+</html>
